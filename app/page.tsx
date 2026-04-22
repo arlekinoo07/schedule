@@ -307,6 +307,15 @@ export default function Home() {
     });
   }
 
+  function openAuthPanel(mode: "login" | "register") {
+    setAuthMode(mode);
+
+    window.requestAnimationFrame(() => {
+      const element = document.getElementById("auth-panel");
+      element?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   function handleRegister(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -465,14 +474,14 @@ export default function Home() {
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
               <button
                 type="button"
-                onClick={() => setAuthMode("login")}
+                onClick={() => openAuthPanel("login")}
                 className="interactive-scale rounded-full bg-white/10 px-4 py-2 text-sm"
               >
                 Вход
               </button>
               <button
                 type="button"
-                onClick={() => setAuthMode("register")}
+                onClick={() => openAuthPanel("register")}
                 className="interactive-scale rounded-full border border-white/20 px-4 py-2 text-sm"
               >
                 Регистрация
@@ -661,7 +670,10 @@ export default function Home() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[26px] border border-[var(--card-border)] bg-white p-5 sm:p-6">
+          <div
+            id="auth-panel"
+            className="rounded-[26px] border border-[var(--card-border)] bg-white p-5 sm:p-6"
+          >
             {currentUser ? (
               <>
                 <div className="mb-5">
@@ -691,7 +703,7 @@ export default function Home() {
                 <div className="mb-5 flex gap-3">
                   <button
                     type="button"
-                    onClick={() => setAuthMode("login")}
+                    onClick={() => openAuthPanel("login")}
                     className={`interactive-scale rounded-full px-4 py-2 text-sm font-medium ${
                       authMode === "login"
                         ? "bg-[#5568f1] text-white"
@@ -702,7 +714,7 @@ export default function Home() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setAuthMode("register")}
+                    onClick={() => openAuthPanel("register")}
                     className={`interactive-scale rounded-full px-4 py-2 text-sm font-medium ${
                       authMode === "register"
                         ? "bg-[#5568f1] text-white"
