@@ -87,6 +87,7 @@ export function LessonEditor({ currentUserExists, lessonForm, onChange, onSubmit
                 <option value="Практика">Практика</option>
                 <option value="Лабораторная">Лабораторная</option>
                 <option value="Семинар">Семинар</option>
+                <option value="Доп. занятие">Доп. занятие</option>
               </select>
             </div>
           </div>

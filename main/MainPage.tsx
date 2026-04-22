@@ -19,6 +19,25 @@ import { readSchedulesMap, readUsers, writeSchedulesMap, writeUsers } from "./st
 import { getWeeks } from "./utils";
 import { Lesson, LessonForm, LoginForm, RegisterForm, User, WeekSchedule } from "./types";
 
+function normalizeTimeValue(value: string) {
+  const trimmed = value.trim();
+  const rangeMatch = trimmed.match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);
+
+  if (rangeMatch) {
+    const [, startHour, startMinute, endHour, endMinute] = rangeMatch;
+    return `${startHour.padStart(2, "0")}:${startMinute} - ${endHour.padStart(2, "0")}:${endMinute}`;
+  }
+
+  const singleMatch = trimmed.match(/^(\d{1,2}):(\d{2})$/);
+
+  if (singleMatch) {
+    const [, hour, minute] = singleMatch;
+    return `${hour.padStart(2, "0")}:${minute}`;
+  }
+
+  return trimmed;
+}
+
 export function MainPage() {
   const weeks = useMemo(() => getWeeks(), []);
   const [isReady, setIsReady] = useState(false);
@@ -181,7 +200,7 @@ export function MainPage() {
         subject: lessonForm.subject.trim(),
         teacher: lessonForm.teacher.trim(),
         day: lessonForm.day,
-        time: lessonForm.time.trim(),
+        time: normalizeTimeValue(lessonForm.time),
         room: lessonForm.room.trim() || "Аудитория не указана",
         type: lessonForm.type,
         grade: "",
