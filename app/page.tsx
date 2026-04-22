@@ -1,5 +1,6 @@
 "use client";
 
+import { BookOpen } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type Lesson = {
@@ -450,9 +451,11 @@ export default function Home() {
       <div className="border-b border-[#d7e3f1] bg-[#2f3b67] text-white">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-10">
           <div className="flex items-center gap-3">
-            <div className="display-font text-3xl font-bold">М</div>
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10">
+              <BookOpen className="h-6 w-6" strokeWidth={2.2} />
+            </div>
             <div>
-              <p className="display-font text-lg font-bold">StudyFlow</p>
+              <p className="display-font text-lg font-bold">Schedule</p>
               <p className="text-sm text-white/70">Расписание занятий</p>
             </div>
           </div>
