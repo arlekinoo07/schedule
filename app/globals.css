@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #eef4fb;
+  --foreground: #1f2a37;
+  --surface: #ffffff;
+  --surface-strong: #f3f8fd;
+  --card-border: #d6e2f0;
+  --accent: #1976d2;
+  --accent-strong: #1258a8;
+  --muted: #63758a;
+  --shadow: 0 16px 40px rgba(48, 87, 140, 0.08);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-comfortaa);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
+  background-image: linear-gradient(180deg, #f7fbff 0%, #eef4fb 100%);
+}
+
+button,
+select,
+a {
+  cursor: pointer;
+}
+
+input {
+  cursor: text;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(15, 92, 138, 0.22);
+}
+
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  opacity: 0.4;
+}
+
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  border-radius: 20px;
+}
+
+.soft-border {
+  border: 1px solid var(--card-border);
+}
+
+.display-font {
+  font-family: var(--font-comfortaa), sans-serif;
+}
+
+.interactive-scale {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.interactive-scale:hover {
+  transform: translateY(-3px) scale(1.035);
+  box-shadow: 0 18px 36px rgba(61, 95, 150, 0.14);
 }
